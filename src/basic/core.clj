@@ -1,6 +1,11 @@
-(ns basic.core)
+(ns basic.core
+  (:use ring.adapter.jetty))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn app [req]
+  {:status 200
+   :headers {"Content-Type" "text/plain"}
+   :body "Hello, world"})
+
+(defn -main []
+  (run-jetty app {:host "localhost"
+                  :port 8000}))
